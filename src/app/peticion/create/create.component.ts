@@ -1,9 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
-import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TokenService } from 'src/app/shared/token.service';
 import { Peticion } from '../peticion';
 import { PeticionService } from '../peticion.service';
+
+
+export class User{
+  name!:string;
+  email!:string;
+}
 
 @Component({
   selector: 'app-create',
@@ -14,9 +20,12 @@ export class CreateComponent implements OnInit {
   peticionForm!: FormGroup;
   errors:any=null;
   peticion!: Peticion; 
+  user!: User
+ 
 
   constructor( public router:Router , public PeticionService: PeticionService, public token:TokenService) {
-   }
+  
+  }
 
   ngOnInit(): void {
     this.peticionForm= new FormGroup({

@@ -4,24 +4,20 @@ import { HttpClient } from '@angular/common/http';
 import { Peticion } from './peticion';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PeticionService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
+  index(): Observable<any> {
+    return this.http.get('http://127.0.0.1:8000/api/peticiones');
+  }
 
-  index(peticion: Peticion): Observable<any> {
-    return this.http.get('http://');
-    
-    }
+  create(peticion: Peticion): Observable<any> {
+    return this.http.post('http://127.0.0.1:8000/api/peticiones', peticion);
+  }
 
-    create(peticion: Peticion): Observable<any> {
-      return this.http.post('http://127.0.0.1:8000/api/peticiones', peticion);
-      
-      }
-
-      edit (peticion: Peticion): Observable<any> {
-        return this.http.post('http://',peticion);
-        
-        }
+  edit(peticion: Peticion): Observable<any> {
+    return this.http.post('http://',peticion);
+  }
 }

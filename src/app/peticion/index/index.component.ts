@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Peticion } from '../peticion';
+import { PeticionService } from '../peticion.service';
 
 @Component({
   selector: 'app-index',
@@ -6,8 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./index.component.css']
 })
 export class IndexComponent implements OnInit {
-
-  constructor() { }
+  peticiones!: Peticion[];
+  constructor(public peticionservice:PeticionService) {
+    this.peticionservice.index().subscribe(
+      (data:any)=>{
+        console.log(data);
+        this.peticiones=data;
+      }
+    );
+  
+   }
 
   ngOnInit(): void {
   }
