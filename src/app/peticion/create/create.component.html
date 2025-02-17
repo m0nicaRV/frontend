@@ -1,0 +1,39 @@
+
+<form [formGroup]="peticionForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data" class="container mt-4 p-4 border rounded shadow my-3">
+    <div *ngIf="errors" class="alert alert-danger">
+        {{ errors }}
+    </div>
+
+
+    
+    <div class="mb-3">
+        <label class="form-label">Titulo:</label>
+        <input type="text" formControlName="titulo" id="titulo" class="form-control" placeholder="Escribe el título">
+    </div>
+
+    <div class="mb-3">
+        <label  class="form-label">Descripcion:</label>
+        <textarea formControlName="descripcion" id="descripcion" class="form-control" rows="3" placeholder="Escribe una descripción"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label  class="form-label">Destinatario:</label>
+        <input type="text" formControlName="destinatario" id="destinatario" class="formcontrol" placeholder="Escribe el destinatario">
+    </div>
+
+    <div class="mb-3">
+        <label  class="form-label">Categoria:</label>
+        <select formControlName="categoria_id" id="categoria_id" class="form-select">
+            <option value="1"> 1</option>
+        </select>
+    </div>
+
+   <!-- <div class="mb-3">
+        <label for="image" class="form-label">Imagen:</label>
+        <input type="file" (change)="onFileChange($event)" id="image" class="form-control">
+    </div>-->
+
+    <div class="d-grid">
+        <button type="submit" class="btn btn-danger">Enviar</button>
+    </div>
+</form>
