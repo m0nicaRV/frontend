@@ -28,10 +28,13 @@
         </select>
     </div>
 
-   <!-- <div class="mb-3">
+   <div class="mb-3">
         <label for="image" class="form-label">Imagen:</label>
-        <input type="file" (change)="onFileChange($event)" id="image" class="form-control">
-    </div>-->
+        <input type="file" (change)="onFileChange($event)" formControlName="image"  id="image" class="form-control" >
+        <div *ngIf="errors?.file" class="alert alert-danger mt-3">
+            {{ errors?.file }}
+        </div>
+    </div>
 
     <div class="d-grid">
         <button type="submit" class="btn btn-danger">Enviar</button>

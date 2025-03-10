@@ -12,7 +12,6 @@ export class IndexComponent implements OnInit {
   constructor(public peticionservice:PeticionService) {
     this.peticionservice.index().subscribe(
       (data:any)=>{
-        console.log(data);
         this.peticiones=data;
       }
     );

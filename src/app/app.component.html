@@ -319,23 +319,19 @@
               </li>
               <div *ngIf="isSignedIn; else login">
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle fs-4 m-2" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{user.name}}</a>
+                  <a class="nav-link dropdown-toggle fs-4 m-2" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{this.user.name}}</a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <li><a class="dropdown-item" href="/">Mis peticiones</a></li>
                     <li><a class="dropdown-item" href="/">Mis firmas</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li>
-                      <form action="/" method="POST">
+                      <form (ngSubmit)="signOut()">
                         <button type="submit" class="dropdown-item link-danger border-0 bg-transparent">Logout</button>
                       </form>
                     </li>
                   </ul>
                 </li>
-                <li>
-                  <form (ngSubmit)="signOut()">
-                    <button type="submit" class="dropdown-item link-danger border-0 bg-transparent">Logout</button>
-                  </form>
-                </li>
+
                 
               </div>
              
