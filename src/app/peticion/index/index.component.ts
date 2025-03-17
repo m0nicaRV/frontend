@@ -9,6 +9,7 @@ export class User{
   id!:number;
   name!:String;
   email!:String;
+  role_id!:number;
 } 
 
 @Component({
@@ -64,11 +65,34 @@ export class IndexComponent implements OnInit {
     }
   }
 
-  onDelete(id:any){}
+  onDelete(id:any){
+    if(id){
+      this.peticionservice.delete(id.toString()).subscribe(
+        () => {
+          window.location.reload(); // Recarga la página después de firmar la petición
+        },
+        (error) => {
+          this.errors = error.error.error;
+        }
+      );
+    }
+  }
+  onEstado(id:any){
+    if(id){
+      this.peticionservice.estado(id.toString()).subscribe(
+        () => {
+          window.location.reload(); // Recarga la página después de firmar la petición
+        },
+        (error) => {
+          this.errors = error.error.error;
+        }
+      );
+    }
+  }
 
   isOwner(id:any){
     console.log(this.user.id , id)
-    return this.user.id == id;
+    return this.user.id == id ||this.user.role_id == 1;
   }
 
 }

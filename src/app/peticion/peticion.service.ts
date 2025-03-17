@@ -32,4 +32,22 @@ export class PeticionService {
   firmar(id: string): Observable<any> {
     return this.http.put(`http://127.0.0.1:8000/api/peticiones/firmar/${id}`, {});
   }
+
+  delete(id: string): Observable<any> {
+    return this.http.delete(`http://127.0.0.1:8000/api/peticiones/${id}`, {});
+  }
+
+  update(id: string, peticion: Peticion): Observable<any> {
+    return this.http.put(`http://127.0.0.1:8000/api/peticiones/${id}`, {peticion});
+  }
+
+  myFirmas(): Observable<any> {
+    return this.http.get('http://127.0.0.1:8000/api/mispeticiones')
+
+  }
+
+  estado(id: string): Observable<any> {
+    return this.http.put(`http://127.0.0.1:8000/api/peticiones/estado/${id}`, {});
+  }
+
 }
