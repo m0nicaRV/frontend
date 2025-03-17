@@ -19,18 +19,19 @@ export class User{
 export class AppComponent implements OnInit{
   title='fronted';
   isSignedIn!: boolean;
-  user!: User;
+  isLoading = true;
+  user: User=new User();
   constructor(private auth: AuthStateService, private router: Router, private token: TokenService, private authService:AuthService){ }
 
   ngOnInit(): void {
     this.auth.userAuthState.subscribe((val) => {
-      console.log(val);
       this.isSignedIn = val;
       if(this.isSignedIn){
         this.authService.profileUser().subscribe((data:any)=>{
         this.user=data;
         });
     }
+      this.isLoading = false;
   });
   }
 

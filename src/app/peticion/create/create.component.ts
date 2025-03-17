@@ -50,6 +50,7 @@ export class CreateComponent implements OnInit {
         descripcion: this.peticionForm.value.descripcion,
         destinatario: this.peticionForm.value.destinatario,
         categoria_id: Number(this.peticionForm.value.categoria_id),*/
+        
         const peticion = new FormData();
         peticion.append('titulo', this.peticionForm.value.titulo);
         peticion.append('descripcion', this.peticionForm.value.descripcion);

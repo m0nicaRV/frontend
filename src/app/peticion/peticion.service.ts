@@ -20,8 +20,16 @@ export class PeticionService {
     return this.http.post('http://127.0.0.1:8000/api/peticiones', peticion,( {headers: headers}));
   }
 
-  show(peticion: any): Observable<any> {
+  show(id: string): Observable<any> {
+    return this.http.get(`http://127.0.0.1:8000/api/peticiones/${id}`);
 
-    return this.http.get('http://127.0.0.1:8000/api/peticiones/',peticion);
+  }
+
+  myPeticiones(): Observable<any> {
+    return this.http.get('http://127.0.0.1:8000/api/mispeticiones')
+  }
+
+  firmar(id: string): Observable<any> {
+    return this.http.put(`http://127.0.0.1:8000/api/peticiones/firmar/${id}`, {});
   }
 }

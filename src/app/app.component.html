@@ -303,57 +303,57 @@
 </style>
 
 <!-- Toolbar -->
+
+
 <nav class="navbar navbar-expand-sm bg-light navbar-light">
   <div class="container">
-      <a class="navbar-brand text-danger fs-2" href="/">Change.org</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-          <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <a class="navbar-brand text-danger fs-2" href="/">Change.org</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link fs-4 m-2" href="/peticiones">Peticiones</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fs-4 m-2" href="/create">Inicia una petición</a>
+        </li>
+        <div *ngIf="isSignedIn; else login">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle fs-4 m-2" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ user.name }}</a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="/mine">Mis peticiones</a></li>
+              <li><a class="dropdown-item" href="/">Mis firmas</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li>
+                <form (ngSubmit)="signOut()">
+                  <button type="submit" class="dropdown-item link-danger border-0 bg-transparent">Logout</button>
+                </form>
+              </li>
+            </ul>
+          </li>
+        </div>
+        <ng-template #login>
           <ul class="navbar-nav ms-auto">
-              <li class="nav-item">
-                  <a class="nav-link fs-4 m-2" href="/peticiones">Peticiones</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link fs-4 m-2" href="/create">Inicia una petición</a>
-              </li>
-              <div *ngIf="isSignedIn; else login">
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle fs-4 m-2" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{this.user.name}}</a>
-                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="/">Mis peticiones</a></li>
-                    <li><a class="dropdown-item" href="/">Mis firmas</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li>
-                      <form (ngSubmit)="signOut()">
-                        <button type="submit" class="dropdown-item link-danger border-0 bg-transparent">Logout</button>
-                      </form>
-                    </li>
-                  </ul>
-                </li>
-
-                
-              </div>
-             
-              <ng-template #login>
-                  <ul class="navbar-nav ms-auto">
-                      <li class="nav-item">
-                          <a class="nav-link fs-4 m-2 link-danger" href="/login">Login</a>
-                      </li>
-                      <li class="nav-item">
-                          <a class="nav-link fs-4 m-2 link-danger" href="/register">Register</a>
-                      </li>
-                  </ul>
-              </ng-template>
-             
-              
+            <li class="nav-item">
+              <a class="nav-link fs-4 m-2 link-danger" href="/login">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link fs-4 m-2 link-danger" href="/register">Register</a>
+            </li>
           </ul>
-      </div>
+        </ng-template>
+      </ul>
+    </div>
   </div>
 </nav>
-<!--@if (session('error'))
-  <div class="alert alert-danger">
-      {{ session('error') }}
+
+<div *ngIf="isLoading" class="d-flex justify-content-center mt-5">
+  <div class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
   </div>
-@endif-->
-<router-outlet></router-outlet>
+</div>
+<div *ngIf="!isLoading">
+  <router-outlet></router-outlet>
+</div>

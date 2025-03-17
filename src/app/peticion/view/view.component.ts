@@ -2,6 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Peticion } from '../peticion';
 import { PeticionService } from '../peticion.service';
 import { ActivatedRoute } from '@angular/router';
+import { AuthStateService } from '../../shared//auth-state.service';
+import { AuthService } from '../../shared/auth.service';
+
+
+export class User{
+  id!:number;
+  name!:String;
+  email!:String;
+} 
 
 @Component({
   selector: 'app-view',
@@ -10,19 +19,63 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ViewComponent implements OnInit {
   peticion!: Peticion;
-  id :string | null = '';
-  constructor(public peticionservice:PeticionService , private route: ActivatedRoute) {
-    this.peticionservice.show(this.id).subscribe(
-      (data:any)=>{
-        console.log(data);
-        this.peticion=data[0];
-      }
-    );
+  isLoading = true;
+  error : any;
+  isSignedIn!: boolean;
+  user: User=new User();
+  errors:any=null;
+
+
+  constructor(public peticionservice:PeticionService , private route: ActivatedRoute,private auth: AuthStateService, private authService:AuthService) {
+    const id = this.route.snapshot.paramMap.get('id');
+    if(id){
+      this.peticionservice.show(id).subscribe(
+        (data: any) => {
+          this.peticion = data[0];
+          this.isLoading = false;
+        },
+        (error) => {
+          this.error = error;
+          this.isLoading = false;
+        }
+      );
+   }
+   this.auth.userAuthState.subscribe((val) => {
+    this.isSignedIn = val;
+    if(this.isSignedIn){
+      this.authService.profileUser().subscribe((data:any)=>{
+      this.user=data;  
+      console.log(data)
+      this.isLoading = false;
+      });
+    }
+    
+  });
   
    }
 
-  ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
+  ngOnInit(): void {}
+
+  onFirmarPeticion(id:any ){
+    if(id){
+      this.peticionservice.firmar(id.toString()).subscribe(
+        () => {
+          window.location.reload(); // Recarga la página después de firmar la petición
+        },
+        (error) => {
+          this.errors = error.error.error;
+        }
+      );
+    }
   }
+
+  onDelete(id:any){}
+
+  isOwner(id:any){
+    console.log(this.user.id , id)
+    return this.user.id == id;
+  }
+
+
 
 }

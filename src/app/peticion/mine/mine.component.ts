@@ -10,28 +10,24 @@ export class User{
   name!:String;
   email!:String;
 } 
-
 @Component({
-  selector: 'app-index',
-  templateUrl: './index.component.html',
-  styleUrls: ['./index.component.css']
+  selector: 'app-mine',
+  templateUrl: './mine.component.html',
+  styleUrls: ['./mine.component.css']
 })
 
-export class IndexComponent implements OnInit {
-  peticiones!: Peticion[];
+export class MineComponent implements OnInit {
   isLoading = true;
+  peticiones!: Peticion[];
   isSignedIn!: boolean;
   user: User=new User();
   errors:any=null;
 
-
-  constructor(public peticionservice:PeticionService,private auth: AuthStateService, private authService:AuthService,  private router: Router) {
-    this.peticionservice.index().subscribe(
+constructor(public peticionservice:PeticionService,private auth: AuthStateService, private authService:AuthService,  private router: Router) {
+    
+    this.peticionservice.myPeticiones().subscribe(
       (data:any)=>{
         this.peticiones=data;
-      },
-      (error) => {
-        this.errors = error.error.error
       }
     );
     this.auth.userAuthState.subscribe((val) => {
@@ -45,7 +41,7 @@ export class IndexComponent implements OnInit {
       }
       
     });
- 
+  
    }
 
   ngOnInit(): void {
@@ -70,5 +66,6 @@ export class IndexComponent implements OnInit {
     console.log(this.user.id , id)
     return this.user.id == id;
   }
+
 
 }
