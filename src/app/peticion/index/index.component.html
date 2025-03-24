@@ -30,7 +30,7 @@
               <button class="btn btn-primary btn-sm ms-2" (click)="onFirmarPeticion(peticion.id)">
                 <i class="bi bi-feather"></i> Firmar
               </button>
-              <ng-container *ngIf="isOwner(peticion.user_id)">
+              <ng-container *ngIf="isOwner(peticion.user_id) || this.user.role_id == 1">
                 <button class="btn btn-danger btn-sm ms-2" (click)="onDelete(peticion.id)">
                   <i class="bi bi-trash"></i> Eliminar
                 </button>
