@@ -1,1 +1,47 @@
-<p>edit works!</p>
+<form [formGroup]="peticionForm" (ngSubmit)="onSubmit(peticionForm)" enctype="multipart/form-data" class="container mt-4 p-4 border rounded shadow my-3">
+
+    <div *ngIf="errors" class="alert alert-danger">
+        {{ errors }}
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Titulo:</label>
+        <input type="text" formControlName="titulo" id="titulo" class="form-control" placeholder="Escribe el título">s
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Descripcion:</label>
+        <textarea formControlName="descripcion" id="descripcion" class="form-control" rows="3" placeholder="Escribe una descripción"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Destinatario:</label>
+        <input type="text" formControlName="destinatario" id="destinatario" class="formcontrol" placeholder="Escribe el destinatario">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Categoria:</label>
+        <select formControlName="categoria_id" id="categoria_id" class="form-select">
+            <option value="1">1</option>
+        </select>
+    </div>
+
+   <div class="mb-3">
+        <label for="image" class="form-label">Imagen:</label>
+        <input type="file" (change)="onFileChange($event)" formControlName="image" id="image" class="form-control" >
+
+         <div *ngIf="peticion?.file?.file_path">
+             <p>Imagen actual:</p>
+             <img [src]="'http://127.0.0.1:8000/storage/' + peticion.file.file_path" alt="Imagen actual de la petición" style="max-width: 200px; height: auto; margin-top: 5px;">
+         </div>
+
+
+        <div *ngIf="errors?.file" class="alert alert-danger mt-3">
+             {{ errors?.file }}
+        </div>
+    </div>
+
+    <div class="d-grid">
+        <button type="submit" class="btn btn-danger">Enviar</button>
+    </div>
+</form>

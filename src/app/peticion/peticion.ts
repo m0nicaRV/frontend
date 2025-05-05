@@ -1,5 +1,5 @@
 export interface Peticion {
-    id?: number
+    id: string
     titulo: string;
     descripcion: string;
     destinatario: string;

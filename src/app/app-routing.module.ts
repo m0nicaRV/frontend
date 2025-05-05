@@ -8,6 +8,7 @@ import { HomeComponent } from './components/home/home.component';
 import { IndexComponent } from './peticion/index/index.component';
 import { ViewComponent } from './peticion/view/view.component';
 import { MineComponent } from './peticion/mine/mine.component';
+import { EditComponent } from './peticion/edit/edit.component';
 
 
 const routes: Routes = [
@@ -19,7 +20,8 @@ const routes: Routes = [
   {path:'create',component:CreateComponent},
   {path:'peticiones',component:IndexComponent},
   {path:'peticiones/:id',component:ViewComponent},
-  {path: 'mine', component: MineComponent}
+  {path: 'mine', component: MineComponent},
+  {path: 'peticiones-edit/:id', component: EditComponent},
 ];
 
 @NgModule({

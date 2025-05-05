@@ -27,7 +27,12 @@ export class IndexComponent implements OnInit {
 
 
   constructor(public peticionservice:PeticionService,private auth: AuthStateService, private authService:AuthService,  private router: Router) {
-    this.peticionservice.index().subscribe(
+   
+ 
+   }
+
+  ngOnInit(): void {
+     this.peticionservice.index().subscribe(
       (data:any)=>{
         this.peticiones=data;
       },
@@ -46,10 +51,6 @@ export class IndexComponent implements OnInit {
       }
       
     });
- 
-   }
-
-  ngOnInit(): void {
   }
 
   onFirmarPeticion(id:any ){

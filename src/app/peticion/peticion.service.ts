@@ -37,8 +37,12 @@ export class PeticionService {
     return this.http.delete(`http://127.0.0.1:8000/api/peticiones/${id}`, {});
   }
 
-  update(id: string, peticion: Peticion): Observable<any> {
-    return this.http.put(`http://127.0.0.1:8000/api/peticiones/${id}`, {peticion});
+  update(id: string, peticion: FormData): Observable<any> {
+    const headers = new HttpHeaders();
+    headers.append('Accept', 'application/json');
+    headers.append('Content-Type', 'multipart/form-data');
+    console.log("hola que tal", peticion);
+    return this.http.post(`http://127.0.0.1:8000/api/peticiones/${id}`, peticion, { headers: headers });
   }
 
   myFirmas(): Observable<any> {
