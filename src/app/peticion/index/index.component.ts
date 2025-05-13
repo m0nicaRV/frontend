@@ -57,7 +57,7 @@ export class IndexComponent implements OnInit {
     if(id){
       this.peticionservice.firmar(id.toString()).subscribe(
         () => {
-          this.router.navigate(['/ruta-destino']);
+          this.router.navigate(['/peticiones']);
         },
         (error) => {
           this.errors = error.error.error;
@@ -70,7 +70,7 @@ export class IndexComponent implements OnInit {
     if(id){
       this.peticionservice.delete(id.toString()).subscribe(
         () => {
-          this.router.navigate(['/ruta-destino']);
+          this.router.navigate(['/peticiones']);
         },
         (error) => {
           this.errors = error.error.error;
@@ -82,7 +82,7 @@ export class IndexComponent implements OnInit {
     if(id){
       this.peticionservice.estado(id.toString()).subscribe(
         () => {
-          this.router.navigate(['/ruta-destino']);
+          this.router.navigate(['/peticiones']);
         },
         (error) => {
           this.errors = error.error.error;
