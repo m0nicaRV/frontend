@@ -57,7 +57,7 @@ export class IndexComponent implements OnInit {
     if(id){
       this.peticionservice.firmar(id.toString()).subscribe(
         () => {
-          window.location.reload(); // Recarga la página después de firmar la petición
+          this.router.navigate(['/ruta-destino']);
         },
         (error) => {
           this.errors = error.error.error;
@@ -70,7 +70,7 @@ export class IndexComponent implements OnInit {
     if(id){
       this.peticionservice.delete(id.toString()).subscribe(
         () => {
-          window.location.reload(); // Recarga la página después de firmar la petición
+          this.router.navigate(['/ruta-destino']);
         },
         (error) => {
           this.errors = error.error.error;
@@ -82,7 +82,7 @@ export class IndexComponent implements OnInit {
     if(id){
       this.peticionservice.estado(id.toString()).subscribe(
         () => {
-          window.location.reload(); // Recarga la página después de firmar la petición
+          this.router.navigate(['/ruta-destino']);
         },
         (error) => {
           this.errors = error.error.error;
